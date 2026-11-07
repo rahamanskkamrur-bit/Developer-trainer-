@@ -379,4 +379,27 @@ def register_commands(bot: TraineeBot):
         await ctx.send(embed=emb)
 
 
-# 
+# ==============================================================================
+# 📘 STEP 8: STARTING THE BOT (`main()`)
+# ==============================================================================
+
+async def main():
+    await run_web_server()
+    asyncio.create_task(self_ping_loop())
+    if not BOT_TOKEN:
+        print("❌ ERROR: BOT_TOKEN environment variable is missing!")
+        while True:
+            await asyncio.sleep(3600)
+
+    bot = TraineeBot(True)
+    register_commands(bot)
+    try:
+        await bot.start(BOT_TOKEN)
+    except discord.PrivilegedIntentsRequired:
+        await bot.close()
+        bot = TraineeBot(False)
+        register_commands(bot)
+        await bot.start(BOT_TOKEN)
+
+if __name__ == "__main__":
+    asyncio.run(main())
