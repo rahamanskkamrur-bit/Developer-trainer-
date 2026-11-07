@@ -379,6 +379,4 @@ def register_commands(bot: TraineeBot):
         await ctx.send(embed=emb)
 
 
-# ==============================================================================
-# 📘 STEP 8: STARTING THE BOT (`main()`)
-# ================================
+# 
